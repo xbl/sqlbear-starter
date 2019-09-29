@@ -29,3 +29,16 @@ jobs:
       with:
         name: sqlbear_linux_x64
         path: /dist/sqlbear_linux_x64
+
+  build_windows_zip:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Make dir and download jre to dist
+      run: |
+        sh ./build_windows_zip.sh
+    - name: Archive zip
+      uses: actions/upload-artifact@v1
+      with:
+        name: sqlbear_windows_x64
+        path: /dist/sqlbear_windows_x64
