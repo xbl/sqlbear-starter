@@ -13,7 +13,7 @@ const webPrint = (res, code, message) => {
 };
 
 const port = 3000;
-const prefix = '/s/';
+const prefix = '/sqlbear/';
 const execute = async (req, res) => {
   const pathname = parse(req.url).pathname;
   if (!pathname.startsWith(prefix)) {
