@@ -7,7 +7,6 @@ on:
 
 jobs:
   build_mac_zip:
-
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -40,12 +39,13 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: /dist/sqlbear_mac_x64.zip
-        asset_name: sqlbear_mac_x64.zip
+        asset_path: /dist/sqlbear_linux_x64.zip
+        asset_name: sqlbear_linux_x64.zip
         asset_content_type: application/zip
 
   build_linux_zip:
     runs-on: ubuntu-latest
+    needs: build_mac_zip
     steps:
     - uses: actions/checkout@v1
     - name: Make dir and download jre to dist
@@ -56,6 +56,16 @@ jobs:
       with:
         name: sqlbear_linux_x64
         path: /dist/sqlbear_linux_x64
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: /dist/sqlbear_mac_x64.zip
+        asset_name: sqlbear_mac_x64.zip
+        asset_content_type: application/zip
 
   build_windows_zip:
     runs-on: ubuntu-latest
