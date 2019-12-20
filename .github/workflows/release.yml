@@ -22,8 +22,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.token }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: ${{ GITHUB_SHA }}
+        release_name: Release ${{ GITHUB_SHA }}
         body: |
           Changes in this Release
           - First Change
