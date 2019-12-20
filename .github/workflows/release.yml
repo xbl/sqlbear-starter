@@ -16,14 +16,17 @@ jobs:
       with:
         name: sqlbear_mac_x64
         path: /dist/sqlbear_mac_x64
+    - uses: montudor/action-zip@v0.1.0
+      with:
+        args: zip -qq -r ./dist/sqlbear_mac_x64.zip ./dist/sqlbear_mac_x64
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.token }}
       with:
-        tag_name: $GITHUB_SHA
-        release_name: Release $GITHUB_SHA
+        tag_name: ${{ github.sha }}
+        release_name: Release ${{ github.sha }}
         body: |
           Changes in this Release
           - First Change
@@ -37,7 +40,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: /dist/sqlbear_mac_x64
+        asset_path: /dist/sqlbear_mac_x64.zip
         asset_name: sqlbear_mac_x64.zip
         asset_content_type: application/zip
 
