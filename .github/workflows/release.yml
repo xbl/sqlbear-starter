@@ -16,9 +16,6 @@ jobs:
       with:
         name: sqlbear_mac_x64
         path: /dist/sqlbear_mac_x64
-    - uses: montudor/action-zip@v0.1.0
-      with:
-        args: zip -qq -r ./dist/sqlbear_mac_x64.zip ./dist/sqlbear_mac_x64
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
