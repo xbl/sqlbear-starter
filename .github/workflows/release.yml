@@ -35,7 +35,7 @@ jobs:
         draft: false
         prerelease: false
     - name: Upload Release Asset mac
-      id: upload-release-asset 
+      id: upload-release-asset-mac
       uses: actions/upload-release-asset@v1.0.1
       env:
         GITHUB_TOKEN: ${{ secrets.token }}
@@ -45,7 +45,7 @@ jobs:
         asset_name: sqlbear_mac_x64.zip
         asset_content_type: application/zip
     - name: Upload Release Asset linux
-      id: upload-release-asset 
+      id: upload-release-asset-linux 
       uses: actions/upload-release-asset@v1.0.1
       env:
         GITHUB_TOKEN: ${{ secrets.token }}
