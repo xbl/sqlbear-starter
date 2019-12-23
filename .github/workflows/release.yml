@@ -20,7 +20,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.token }}
       with:
         tag_name: v.${{ github.sha }}
-        release_name: Release ${{ github.event.push.created_at }}
+        release_name: Release
         body: |
           Changes in this Release
           - First Change
